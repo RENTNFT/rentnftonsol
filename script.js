@@ -12,18 +12,16 @@ document.querySelectorAll('.faq-item h3').forEach(item => {
     });
 });
 
-// Define a function to connect to the Phantom wallet
+// Check for Phantom wallet and connect
 async function connectWallet() {
     if (window.solana && window.solana.isPhantom) {
         try {
-            // Check if wallet is already connected
             if (window.solana.isConnected) {
                 const walletPublicKey = window.solana.publicKey.toString();
                 document.getElementById("wallet-status").innerHTML = `Wallet Connected: ${walletPublicKey}`;
-                return; // Exit if already connected
+                return;
             }
-
-            // Request wallet connection
+            
             const response = await window.solana.connect();
             const walletPublicKey = response.publicKey.toString();
             document.getElementById("wallet-status").innerHTML = `Wallet Connected: ${walletPublicKey}`;
